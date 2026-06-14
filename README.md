@@ -236,3 +236,9 @@ MIT License — free to use, modify, and distribute.
 ---
 
 *Built with [Google Gemini API](https://ai.google.dev/) · [ReportLab](https://www.reportlab.com/) · [Playwright](https://playwright.dev/)*
+
+---
+
+## Developer
+
+Built by **[DaniMaster](https://www.danimaster.com/)** — visit [danimaster.com](https://www.danimaster.com/) for more tools and projects.
