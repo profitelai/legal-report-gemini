@@ -1,28 +1,74 @@
-# Legal Evidence Report Generator
+# Legal Evidence Report Generator — AI-Powered PDF for Lawyers
 
-An AI-powered tool that fetches Gemini conversation links, combines them, and generates a structured **PDF report** for your lawyer — in French, with a chronological timeline, contradictions, escalation curve, and evidence index.
+> Generate a structured **legal evidence report PDF** from your Gemini AI conversations in minutes.
+> Organize your case timeline, contradictions, and key actors — ready to hand directly to your lawyer.
 
----
-
-## What it does
-
-1. Fetches any number of shared Gemini conversation links automatically
-2. Combines them with any local text files you provide
-3. Sends everything to the Gemini AI for structured legal analysis
-4. Exports a clean **PDF** and **Markdown** report ready to hand to your lawyer
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
+[![Gemini AI](https://img.shields.io/badge/Powered%20by-Gemini%20AI-orange)](https://ai.google.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![PDF Output](https://img.shields.io/badge/Output-PDF%20%2B%20Markdown-red)](DEMO_Report.pdf)
 
 ---
 
-## Requirements
+## What Is This Tool?
+
+**Legal Evidence Report Generator** is an open-source Python tool that:
+
+- Automatically fetches your **shared Gemini AI conversations** via link
+- Combines multiple sessions into a single unified evidence base
+- Uses **Gemini AI** to analyze, organize, and structure all information
+- Exports a **professional PDF legal evidence report** and Markdown file
+
+The output is a lawyer-ready document organized with:
+- Chronological timeline of events
+- Identified contradictions and potential agreement violations
+- Behavioral escalation curve (cooperative → hostile)
+- Index of all evidence and sources
+- Questions suggested for legal review
+
+**Languages:** French (default) — ideal for Quebec / Canadian law practice.
+
+---
+
+## Demo Report
+
+See a real sample output generated from Gemini conversations:
+
+- [DEMO_Report.md](DEMO_Report.md) — view directly on GitHub
+- [DEMO_Report.pdf](DEMO_Report.pdf) — download the formatted PDF
+
+---
+
+## Who Is This For?
+
+| Use Case | Description |
+|---|---|
+| **Individuals preparing a legal case** | Organize months of messages, emails, and conversations into one clear document |
+| **Lawyers and paralegals** | Receive structured, AI-analyzed evidence from clients in PDF format |
+| **Mediators and arbitrators** | Review a neutral chronological timeline with flagged contradictions |
+| **Anyone documenting a dispute** | Non-violence agreements, custody, business, harassment, property — any case |
+
+---
+
+## Key Features
+
+- **Automatic Gemini link extraction** — paste a `gemini.google.com/share/` link, the tool fetches it automatically using a headless browser
+- **Multi-session combining** — add 2, 5, or 20 links and they are all merged before analysis
+- **Smart PDF layout** — chronological table with auto-wrapping text, no overlap, clean columns
+- **AI model fallback** — tries `gemini-2.5-pro` → `gemini-2.5-flash` → `gemini-2.0-flash` automatically if quota is exceeded
+- **No private data committed** — `.env` and all personal files are gitignored by default
+- **Works offline with text files** — if a link can't be fetched, paste the conversation into a `.txt` file
+
+---
+
+## Installation
+
+### Requirements
 
 - Python 3.9 or higher
-- A free Gemini API key from [Google AI Studio](https://aistudio.google.com/app/apikey)
+- Free [Gemini API key](https://aistudio.google.com/app/apikey) (Google account required)
 
----
-
-## Installation (one time only)
-
-### Step 1 — Clone the project
+### Step 1 — Clone
 
 ```bash
 git clone https://github.com/profitelai/legal-report-gemini.git
@@ -38,14 +84,12 @@ python3 -m playwright install chromium
 
 ### Step 3 — Get a free Gemini API key
 
-1. Go to [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
+1. Visit [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
 2. Sign in with your Google account
 3. Click **Create API key**
 4. Copy the key
 
-### Step 4 — Create your `.env` file
-
-Copy the example file and add your key:
+### Step 4 — Configure your `.env` file
 
 ```bash
 cp .env.example .env
@@ -54,116 +98,141 @@ cp .env.example .env
 Open `.env` and replace the placeholder:
 
 ```
-ai_studio=YOUR_GEMINI_KEY_HERE
+ai_studio=YOUR_GEMINI_API_KEY_HERE
 ```
 
 ---
 
-## How to use it
+## How to Run
 
 ### Step 1 — Add your Gemini conversation links
 
-Open `legal_report_gemini.py` in any text editor.
-
-Find the `gemini_share_urls` list and paste your links:
+Open `legal_report_gemini.py` and paste your links:
 
 ```python
 gemini_share_urls = [
     "https://gemini.google.com/share/YOUR_FIRST_LINK",
     "https://gemini.google.com/share/YOUR_SECOND_LINK",
-    "https://gemini.google.com/share/YOUR_THIRD_LINK",
-    # Add as many as you need
+    # Add as many as needed
 ]
 ```
 
 **How to get a Gemini share link:**
-- Open your conversation on [gemini.google.com](https://gemini.google.com)
-- Click the **Share** button
-- Copy the link that appears
+1. Open your conversation at [gemini.google.com](https://gemini.google.com)
+2. Click the **Share** button (top right)
+3. Copy the link
 
-### Step 2 — Run the tool
+### Step 2 — Run
 
 ```bash
 python3 legal_report_gemini.py
 ```
 
-### Step 3 — Get your report
+### Step 3 — Get your legal evidence report
 
-Two files will be created in the same folder:
+Two files are created automatically:
 
-| File | Description |
+```
+Legal_Strategic_Report.pdf   ← Send this to your lawyer
+Legal_Strategic_Report.md    ← Plain text version
+```
+
+---
+
+## Report Structure
+
+The generated PDF legal evidence report contains these sections, in order:
+
+| Section | Description |
 |---|---|
-| `Legal_Strategic_Report.pdf` | Send this to your lawyer |
-| `Legal_Strategic_Report.md` | Plain text version |
+| **1. Résumé Exécutif** | Short factual overview of the situation |
+| **2. Chronologie des Événements** | Timeline: Date, Time, Source, Actor, Event, Evidence Note |
+| **3. Contradictions et Violations Potentielles** | Where statements conflict or agreements appear breached |
+| **4. Courbe d'Escalade** | Tone progression: Cooperative → Tense → Hostile |
+| **5. Personnes Clés** | Each actor's role based only on provided evidence |
+| **6. Index des Preuves** | Full list of documents, messages, and sources |
+| **7. Questions pour l'Avocat** | Suggested factual questions for legal review |
 
 ---
 
-## What the report contains
+## Supported Input Types
 
-The PDF is organized in chronological order with these sections:
-
-1. **Résumé Exécutif** — Short factual overview
-2. **Chronologie des Événements** — Timeline table: Date, Time, Source, Actor, Event, Evidence Note
-3. **Contradictions et Violations Potentielles** — Where statements conflict or agreements were breached
-4. **Courbe d'Escalade** — How tone shifted from cooperative to hostile
-5. **Personnes Clés** — Each person's role based on the evidence
-6. **Index des Preuves** — Full list of all documents, messages, and sources
-7. **Questions pour l'Avocat** — Factual questions the lawyer should review
-
----
-
-## If a conversation won't download automatically
-
-Some Gemini links require a logged-in session. If the tool can't fetch a link automatically:
-
-1. Open the link in Chrome while logged into your Google account
-2. Press `Ctrl+A` (Windows) or `Cmd+A` (Mac) to select all
-3. Copy and paste the text into `gemini_session_1.txt`
-4. Add it to the `text_files` list in `main()`:
-   ```python
-   text_files = ["gemini_session_1.txt"]
-   ```
-5. Re-run the script
-
----
-
-## If the API quota is exceeded
-
-The tool automatically tries multiple Gemini models in order:
-`gemini-2.5-pro` → `gemini-2.5-flash` → `gemini-2.0-flash` → `gemini-2.0-flash-lite`
-
-If all are exhausted (free daily quota), get a new free key at [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey) and update your `.env` file. Free keys reset daily.
-
----
-
-## Supported input types
-
-| Type | Example |
+| Source | Format |
 |---|---|
-| Gemini share link | `https://gemini.google.com/share/XXXXXXXX` |
-| Google AI Studio link | `https://aistudio.google.com/app/prompts?state=...` |
-| Local text file | `mes_messages.txt`, `gemini_session_1.txt` |
-| Any public URL | Any webpage with readable content |
+| Gemini shared conversation | `https://gemini.google.com/share/XXXXXXXX` |
+| Google AI Studio prompt | `https://aistudio.google.com/app/prompts?state=...` |
+| Manual copy-paste | `.txt` file (any name) |
+| Public web page | Any readable URL |
 
 ---
 
-## Project structure
+## Frequently Asked Questions
+
+**Can I use this for any type of legal case?**
+Yes. The tool works for any dispute: custody, harassment, business contracts, property, mediation agreements, etc.
+
+**Is my data sent to Google?**
+The text from your conversations is sent to the Gemini API for analysis. Review [Google's privacy policy](https://policies.google.com/privacy) before use. Do not commit your `.env` file.
+
+**The report says "potential" and "appears to" everywhere — why?**
+This tool does not give legal advice. Neutral language is intentional so a qualified lawyer can make the final assessment.
+
+**What if a Gemini link won't download?**
+Some private links require a logged-in browser session. In that case:
+1. Open the link in Chrome
+2. Press `Ctrl+A` / `Cmd+A` to select all text
+3. Paste into `gemini_session_1.txt`
+4. Add the filename to the `text_files` list and re-run
+
+**What if I get a quota error?**
+The tool automatically tries multiple models. If all free-tier models are exhausted, get a new free key at [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey) (resets daily).
+
+**Can I run this in French only?**
+Yes — the default output is French. The AI prompt is configured for French legal terminology.
+
+---
+
+## Project Structure
 
 ```
 legal-report-gemini/
 ├── legal_report_gemini.py   # Main script
 ├── requirements.txt         # Python dependencies
-├── .env.example             # API key template
-├── .gitignore               # Excludes .env and report files
+├── .env.example             # API key template (safe to share)
+├── .gitignore               # Excludes .env, reports, personal files
+├── DEMO_Report.md           # Sample output (Markdown)
+├── DEMO_Report.pdf          # Sample output (PDF)
 └── README.md                # This file
 ```
 
 ---
 
-## Disclaimer
+## Dependencies
 
-This tool organizes evidence for review by a qualified lawyer. It does not constitute legal advice.
+| Package | Purpose |
+|---|---|
+| `google-genai` | Gemini AI API client |
+| `playwright` | Headless browser to fetch Gemini share pages |
+| `beautifulsoup4` | HTML parsing |
+| `reportlab` | PDF generation (no system libraries needed) |
+| `markdown` | Markdown processing |
+| `python-dotenv` | `.env` file loading |
+| `requests` | HTTP requests |
 
 ---
 
-*Built with [Google Gemini API](https://ai.google.dev/) and [ReportLab](https://www.reportlab.com/).*
+## Disclaimer
+
+This tool organizes and structures evidence for review by a qualified lawyer.
+**It does not constitute legal advice.**
+Always consult a licensed attorney for legal matters.
+
+---
+
+## License
+
+MIT License — free to use, modify, and distribute.
+
+---
+
+*Built with [Google Gemini API](https://ai.google.dev/) · [ReportLab](https://www.reportlab.com/) · [Playwright](https://playwright.dev/)*
