@@ -1,0 +1,23 @@
+# API key — never commit this
+.env
+
+# Generated output reports
+Legal_Strategic_Report.md
+Legal_Strategic_Report.pdf
+Rapport_Juridique.md
+Rapport_Juridique.pdf
+
+# Personal data files — add your own, never commit them
+mes_messages.txt
+gemini_session_*.txt
+session_*.txt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# macOS
+.DS_Store
